@@ -1,8 +1,56 @@
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+body {
+  font-family: Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+header {
+  text-align: center;
+  padding: 2px;
+  font-size: 40px;
+}
+
+main {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.canvas-container {
+  background: rgba(0, 0, 0, 0.06);
+  padding: 10px;
+  border-radius: 12px;
+  border: 2px solid rgba(0, 0, 0, 0.07);
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+}
+
+.canvas-container canvas {
+  max-width: 700px;
+  width: 85vw;
+  background: white;
+}
+
+.toolbox {
+  padding-left: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.toolbox .color-item {
+  border-radius: 100px;
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(0, 0, 0, 0.2);
+  transition: all 150ms ease-in-out;
+  margin: 4px 0;
+}
+
+.toolbox .color-item:hover {
+  cursor: pointer;
+  transform: scale(1.1);
 }
