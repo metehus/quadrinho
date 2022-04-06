@@ -1,10 +1,7 @@
 import "./style.css";
 import "./drawing";
-import { registerServiceWorker } from "./serviceWorkerRegistration";
 import { saveCanvas } from "./drawing";
 import { addDrawingToSaved } from "./savedBoards";
-
-registerServiceWorker();
 
 const saveButton = document.querySelector("button.save-button")!
 
