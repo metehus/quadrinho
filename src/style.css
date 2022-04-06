@@ -135,8 +135,17 @@ main {
   background: rgba(0, 0, 0, 0.2);
 }
 
-.saved {
+.saved-boards {
   max-width: 700px;
   margin: 8px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 10px;
+}
+
+.saved-boards img {
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
 }
 

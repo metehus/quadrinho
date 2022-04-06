@@ -5,9 +5,12 @@
     "noEmit": false,
     "strict": false,
     "outDir": "public",
-    "target": "ESNext",
+    "target": "ES5",
+    "moduleResolution": "Node",
+    "isolatedModules": false
   },
   "include": [
     "sw"
   ],
+  "exclude": ["public"]
 }
