@@ -1,24 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-  </head>
-  <body>
-    <header>
-      Quadrinho
-    </header>
 
-    <main>
-      <div class="canvas-container">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite App</title>
+</head>
+
+<body>
+  <header>
+    Quadrinho
+  </header>
+
+  <main>
+    <div class="canvas-container">
+      <div class="drawing-section">
         <canvas id="drawing-canvas" width="1280" height="720"></canvas>
         <div class="toolbox">
+          <div class="colors"></div>
+          <hr>
+          <div class="brush-size">
+            <button class="brush-large"></button>
+            <button class="brush-medium selected"></button>
+            <button class="brush-small"></button>
+          </div>
         </div>
       </div>
-    </main>
+      <button class="save-button">Salvar quadro</button>
+    </div>
 
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+    <div class="saved">
+      <h2>Quadros salvos</h2>
+    </div>
+  </main>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
 </html>

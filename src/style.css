@@ -19,20 +19,32 @@ main {
   flex-direction: column;
 }
 
+.drawing-section {
+  display: flex;
+}
+
 .canvas-container {
-  background: rgba(0, 0, 0, 0.06);
+  background: rgba(0, 0, 0, 0.1);
   padding: 10px;
   border-radius: 12px;
   border: 2px solid rgba(0, 0, 0, 0.07);
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.05);
   display: flex;
   align-items: center;
+  flex-direction: column;
 }
 
 .canvas-container canvas {
   max-width: 700px;
   width: 85vw;
   background: white;
+  border-radius: 6px;
+}
+
+.toolbox > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .toolbox {
@@ -41,16 +53,90 @@ main {
   flex-direction: column;
 }
 
-.toolbox .color-item {
+.toolbox .colors .color-item {
   border-radius: 100px;
   width: 24px;
   height: 24px;
   border: 3px solid rgba(0, 0, 0, 0.2);
   transition: all 150ms ease-in-out;
-  margin: 4px 0;
+  margin: 4px 5px 4px 2px;
 }
 
-.toolbox .color-item:hover {
+.toolbox .colors .color-item:hover {
   cursor: pointer;
   transform: scale(1.1);
 }
+
+.toolbox .colors .color-item.selected,
+.toolbox .brush-size button.selected {
+  transform: scale(1.2);
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.toolbox .color-item.selected::after {
+  display: block;
+  content: '';
+  width: 3px;
+  height: 3px;
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  left: 26px;
+  border-radius: 6px;
+}
+
+.toolbox hr {
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.toolbox .brush-size button {
+  border-radius: 100px;
+  width: 24px;
+  height: 24px;
+  border: none;
+  transition: all 150ms ease-in-out;
+  background: black;
+  margin: 4px 5px 4px 2px;
+  padding: 0;
+}
+
+.toolbox .brush-size *:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.brush-size button.brush-small {
+  border: 9px solid rgba(255, 255, 255, 0.9);
+  /* padding: 8px; */
+}
+
+.brush-size button.brush-medium {
+  border: 6px solid rgba(255, 255, 255, 0.9);
+}
+
+.brush-size button.brush-large {
+  border: 3px solid rgba(255, 255, 255, 0.9);
+}
+
+.save-button {
+  margin-top: 12px;
+  background: rgba(0, 0, 0, 0.15);
+  border: none;
+  /* color: white; */
+  border-radius: 32px;
+  padding: 5px 10px;
+  transition: all 200ms ease-in-out;
+  font-size: 18px;
+}
+
+.save-button:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.saved {
+  max-width: 700px;
+  margin: 8px;
+}
+
