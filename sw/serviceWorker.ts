@@ -15,5 +15,23 @@ _self.addEventListener('fetch', (event) => {
             cache.put(event.request, response.clone())
             return response
         })())
+    } else if (url.pathname.includes('drawings/')) {
+        event.respondWith((async () => {
+            const match = await caches.match(event.request.url)
+            if (match) return match
+            const response = new Response('Drawing not found.')
+            return response
+        })())
     }
 })
+
+/*
+_self.addEventListener('install', (event) => {
+    event.waitUntil(
+      caches.open('app-files')
+        .then(function (cache) {
+          return cache.addAll(['/', '/assets/index.css', '/assets/index.js']);
+        })
+    );
+  });
+  */
