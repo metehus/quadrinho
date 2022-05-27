@@ -14,7 +14,7 @@ saveButton.addEventListener("click", async () => {
     const boardId = nanoid(16);
     const url = `/drawings/${boardId}.png`;
 
-    const cache = await caches.open("savedBoards");
+    const cache = await caches.open("saved-boards");
     const response = new Response(blob, {
         headers: {
             "Content-Type": "image/png",
@@ -22,17 +22,17 @@ saveButton.addEventListener("click", async () => {
     });
     await cache.put(url, response);
 
-    const localStorageBoards = localStorage.getItem('savedBoards')
+    const localStorageBoards = localStorage.getItem('saved-boards')
     const savedBoards: string[] = localStorageBoards ? JSON.parse(localStorageBoards) : []
 
     savedBoards.push(url)
-    localStorage.setItem('savedBoards', JSON.stringify(savedBoards))
+    localStorage.setItem('saved-boards', JSON.stringify(savedBoards))
 
     addDrawingToSaved(url);
 });
 
 function loadSavedBoardsFromStorage () {
-    const localStorageSavedBoards = localStorage.getItem('savedBoards')
+    const localStorageSavedBoards = localStorage.getItem('saved-boards')
     if (localStorageSavedBoards) {
         const savedBoards = JSON.parse(localStorageSavedBoards) as string[]
         for (const board of savedBoards) {

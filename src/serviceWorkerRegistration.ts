@@ -38,7 +38,9 @@ function registerValidSW(swUrl: string, config?: Config) {
   console.log(swUrl);
 
   navigator.serviceWorker
-    .register(swUrl)
+    .register(swUrl, {
+      scope: '/app'
+    })
     .then((registration) => {
       if (!registration) {
         return console.error("Could not register service worker");
