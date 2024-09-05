@@ -3,35 +3,33 @@ const _self: ServiceWorkerGlobalScope & typeof globalThis = self as any
 
 console.log('Hello world from service worker')
 
-_self.addEventListener('fetch', (event) => {
-    console.log('Service worker proxying', event.request.url)
-    const url = new URL(event.request.url)
-    if (/(.*).(js|css|html|svg)/i.test(event.request.url) || url.pathname === '/') {
-        event.respondWith((async () => {
-            const match = await caches.match(event.request)
-            if (match) return match
-            const response = await fetch(event.request)
-            const cache = await caches.open('app-files')
-            cache.put(event.request, response.clone())
-            return response
-        })())
-    } else if (url.pathname.includes('drawings/')) {
-        event.respondWith((async () => {
-            const match = await caches.match(event.request.url)
-            if (match) return match
-            const response = new Response('Drawing not found.')
-            return response
-        })())
-    }
-})
-
-/*
 _self.addEventListener('install', (event) => {
     event.waitUntil(
-      caches.open('app-files')
-        .then(function (cache) {
-          return cache.addAll(['/', '/assets/index.css', '/assets/index.js']);
-        })
-    );
-  });
-  */
+        fetch('/manifest.json')
+            .then(res => res.json())
+            .then(async ({ files }) => {
+                console.log('Instalando aplicativo para offline...')
+                const cache = await caches.open('app-files')
+                return cache.addAll([...files, '/'])
+            })
+    )
+})
+
+_self.addEventListener('activate', (event) => {
+    // Attach worker to current client
+    event.waitUntil(_self.clients.claim())
+})
+
+_self.addEventListener('fetch', (event) => {
+    console.log('Service worker proxying', event.request.url)
+        event.respondWith(
+            caches.match(event.request.url).then(match => {
+                if (match) return match
+                if (event.request.url.includes('drawings/')) {
+                    return new Response('Drawing not found.')
+                } else {
+                    return fetch(event.request.url)
+                }
+            })
+        )
+})
